@@ -12,3 +12,5 @@ This folder contains guidelines that walk you through common tasks needed to com
 - [How can I review service credentials of a linked Watson Service?](./create-service-credentials)
 - [How can I download files from Github?](./download-files-github)
 - [How long can I use notebooks in Watson Studio for free?](./capacity-unit-hours)
+- [How can I start Node-RED on my local workstation?](./node-red-workstation)
+- [How can I provision a free Node-RED instance on IBM Cloud?](./node-red-cloud)
