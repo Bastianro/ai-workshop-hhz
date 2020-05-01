@@ -1,0 +1,777 @@
+[
+    {
+        "id": "2215a883.0a9278",
+        "type": "tab",
+        "label": "Global",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "de6bff09.2f4c2",
+        "type": "tab",
+        "label": "Visual Recognition",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1bad8c04.b1d4c4",
+        "type": "tab",
+        "label": "Tone Analyzer",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "88ed869a.ce4158",
+        "type": "tab",
+        "label": "Translator",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "380de17f.81714e",
+        "type": "tab",
+        "label": "Digit Recognizer",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "73e58188.e06f4",
+        "type": "http in",
+        "z": "380de17f.81714e",
+        "name": "",
+        "url": "/ui/digit-recognizer",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "100ee49d.31eb1b"
+            ]
+        ]
+    },
+    {
+        "id": "100ee49d.31eb1b",
+        "type": "template",
+        "z": "380de17f.81714e",
+        "name": "HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html>\n\n<head>\n    <title>Digit Recognizer</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://unpkg.com/carbon-components/css/carbon-components.min.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"digit-recognizer/styles.css\">\n    <script type=\"text/javascript\" src=\"digit-recognizer/app.js\"></script>\n</head>\n\n<body>\n    <div id='header'>\n        <h1>Digit Recognizer Example</h1>\n        <h3>Instructions</h3>\n        <ol class=\"bx--list--unordered\">\n            <li class=\"bx--list__item\">Draw a single digit (0 - 9) in the box using your mouse</li>\n            <li class=\"bx--list__item\">Click Analyze</li>\n        </ol>\n    </div>\n    <div class=\"flex\">\n        <div id='canvas' class=\"layout_3\">\n            <h3>Canvas</h3>\n            <canvas id='drawing_box' onmousedown='start_drawing(event);' onmouseup='stop_drawing(event);'\n                onmouseout='stop_drawing(event);' onmousemove='draw_line(event);' height=\"200\" , width=\"200\"\n                title=\"Draw a single digit\">\n            </canvas>\n            <div>\n                <button class=\"bx--btn bx--btn--primary\" type=\"button\" id='submit_button' onclick='submit_drawing();'\n                    title='Submit current drawing for analysis'>Analyze\n                </button>\n                <button class=\"bx--btn bx--btn--secondary\" type=\"button\" id='clear_button' onclick='clear_everything();'\n                    title='Clear drawing and results'>Clear\n                </button>\n            </div>\n        </div>\n    \n    \n        <div id='payload' class=\"layout_3\">\n            <h3>Generated Payload</h3>\n            <pre id=\"payload_code\" class=\"code_snippet\">\n            </pre>\n        </div>\n    \n    \n        <div id='response' class=\"layout_3\">\n            <h3>Returned Classification</h3>\n            <pre id=\"response_code\" class=\"code_snippet\">\n            </pre>\n        </div>\n    </div>\n    <div id=\"footer\">\n        <h3>Details</h3>\n        <p>Watch as the image data from the canvas (RGBA format) is preprocessed before being sent in the payload to the\n        model. The preprocessing is as close as possible to how the MNIST training data was prepared:\n        </p>\n        <ul class=\"bx--list--unordered\">\n            <li class=\"bx--list__item\">A rectangular bounding box is created around the digit (the red box is for\n                illustration only, and is not part of the processing)</li>\n            <li class=\"bx--list__item\">A square bounding box is created, with the digit centered in the box</li>\n            <li class=\"bx--list__item\">The content in the square box is resized to 28 pixels by 28 pixels</li>\n            <li class=\"bx--list__item\">The image is converted to greyscale by setting RGB values to zero, leaving only\n                the Alpha value remaining</li>\n            <li class=\"bx--list__item\">The Alpha values are collected in a 1 by 784 array</li>\n            <li class=\"bx--list__item\">Values in the array are normalized (divided by 255) to values between 0 and 1</p>\n        </ul>\n    </div>\n\n\n</body>\n\n</html>",
+        "output": "str",
+        "x": 490,
+        "y": 60,
+        "wires": [
+            [
+                "5e59667c.060bc8"
+            ]
+        ]
+    },
+    {
+        "id": "5e59667c.060bc8",
+        "type": "http response",
+        "z": "380de17f.81714e",
+        "name": "Send Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 980,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "672a7053.9480a",
+        "type": "http in",
+        "z": "380de17f.81714e",
+        "name": "",
+        "url": "/ui/digit-recognizer/styles.css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "53a43ffb.de8e8"
+            ]
+        ]
+    },
+    {
+        "id": "c91701e0.feffd",
+        "type": "http in",
+        "z": "380de17f.81714e",
+        "name": "",
+        "url": "/ui/digit-recognizer/app.js",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "1d62b310.861dfd"
+            ]
+        ]
+    },
+    {
+        "id": "53a43ffb.de8e8",
+        "type": "template",
+        "z": "380de17f.81714e",
+        "name": "CSS",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "css",
+        "syntax": "mustache",
+        "template": "#drawing_box {\n    margin: 0px;\n    padding: 0px;\n    border: 2px solid black;\n    overflow: none;\n}",
+        "output": "str",
+        "x": 490,
+        "y": 100,
+        "wires": [
+            [
+                "3b8700eb.47cff"
+            ]
+        ]
+    },
+    {
+        "id": "1d62b310.861dfd",
+        "type": "template",
+        "z": "380de17f.81714e",
+        "name": "JS",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "javascript",
+        "syntax": "mustache",
+        "template": "var g_mouse_is_down = false;\nvar g_prev_pixel_X = -1;\nvar g_prev_pixel_Y = -1;\nvar g_line_width = 25;\nvar g_min_X = 200;\nvar g_min_Y = 200; \nvar g_max_X = 0;\nvar g_max_Y = 0;\n\nvar g_saved_digit = null;\n\nfunction start_drawing(e) {\n    g_mouse_is_down = true;\n    g_prev_pixel_X = e.clientX - document.getElementById('drawing_box').getBoundingClientRect().left;\n    g_prev_pixel_Y = e.clientY - document.getElementById('drawing_box').getBoundingClientRect().top;\n}\n\n\nfunction stop_drawing(e) {\n    g_mouse_is_down = false;\n    saveImage();\n}\n\n\nfunction draw_line(e) {\n    if ((g_mouse_is_down) && (g_prev_pixel_X > -1) && (g_prev_pixel_Y > -1)) {\n        pixel_X = e.clientX - document.getElementById('drawing_box').getBoundingClientRect().left;\n        pixel_Y = e.clientY - document.getElementById('drawing_box').getBoundingClientRect().top;\n\n        var ctx = document.getElementById('drawing_box').getContext('2d');\n        ctx.strokeStyle = \"purple\";\n        ctx.lineWidth = g_line_width;\n        ctx.beginPath();\n        ctx.moveTo(g_prev_pixel_X, g_prev_pixel_Y);\n        ctx.lineTo(pixel_X, pixel_Y);\n        ctx.stroke();\n\n        g_prev_pixel_X = pixel_X;\n        g_prev_pixel_Y = pixel_Y;\n\n        if (pixel_X < g_min_X) { g_min_X = pixel_X; }\n        if (pixel_X > g_max_X) { g_max_X = pixel_X; }\n        if (pixel_Y < g_min_Y) { g_min_Y = pixel_Y; }\n        if (pixel_Y > g_max_Y) { g_max_Y = pixel_Y; }\n    }\n}\n\n\nfunction clearCanvas() {\n    var canvas = document.getElementById('drawing_box');\n    var ctx = canvas.getContext('2d');\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\n}\n\n\nfunction clearPayloadDiv() {\n    document.getElementById('payload_code').innerHTML = \"\";\n}\n\n\nfunction populatePayloadDiv(payload) {\n    document.getElementById('payload_code').innerHTML = JSON.stringify(payload, null, 3);\n}\n\n\nfunction clearResultsDiv() {\n    document.getElementById('response_code').innerHTML = \"\";\n}\n\n\nfunction populateResultsDiv(result) {\n    document.getElementById('response_code').innerHTML = result;\n}\n\n\nfunction resetGlobalVars() {\n    g_mouse_is_down = false;\n    g_prev_pixel_X = -1;\n    g_prev_pixel_Y = -1;\n    g_min_X = 200;\n    g_min_Y = 200;\n    g_max_X = 0;\n    g_max_Y = 0;\n}\n\n\nfunction resetUI() {\n    clearCanvas();\n    clearPayloadDiv();\n    clearResultsDiv();\n    document.getElementById('submit_button').title = 'Submit current drawing for analysis';\n}\n\n\nfunction clear_everything() {\n    resetUI();\n    resetGlobalVars();\n    g_saved_digit = null;\n}\n\n\nfunction saveImage() {\n    var canvas = document.getElementById('drawing_box');\n    var ctx = canvas.getContext('2d');\n    g_saved_digit = ctx.getImageData(0, 0, canvas.width, canvas.height);\n}\n\n\nfunction revertImage() {\n    resetUI();\n    var ctx = document.getElementById('drawing_box').getContext('2d');\n    ctx.putImageData(g_saved_digit, 0, 0);\n}\n\nfunction sendPayloadToDeployment(payload) {\n    return fetch(`/api/digit-recognizer`, {\n        method: \"POST\",\n        body: JSON.stringify(payload),\n        headers: {\n            \"Content-Type\": \"application/json\"\n        }\n    })\n        .then(response => response.json())\n        .then(responseJson => {\n            processresultHandler(responseJson);\n        })\n        .catch(error => {\n            console.error(\"Error:\", error);\n        });\n}\n\nfunction submit_drawing() {\n    if (null !== document.getElementById('submit_button').title.match(/clear/i)) {\n        alert(\"Click 'Clear' to clean the canvas and start again.\");\n        return;\n    }\n\n    document.getElementById('submit_button').title = \"Click 'Clear' to clean the canvas and start again\";\n\n\n    digit_img = get_bounding_box();\n\n    // Note: The timeouts here are just to gradually show the\n    // progression of preprocessing steps in the UI\n    setTimeout(function () {\n        [centered_img, box_X, box_Y] = center(digit_img);\n\n        var deployment_type = \"sendtomodel\"; //document.querySelector('input[name=\"deployment_type\"]:checked').value;\n\n        if (deployment_type.match(/function/)) {\n            // If using the function deployment, we don't need to do any more\n            // preprocessing here in the app because the function handles that\n            var payload = { \"values\": [{ \"height\": centered_img.height, \"data\": [Array.from(centered_img.data)] }] };\n\n            populatePayloadDiv(\"error\");\n        }\n        else {\n            // To send a payload to the model deployment, we need to do\n            // more preprocessing here in the app\n            setTimeout(function () {\n                var tiny_img = resize_28x28(centered_img, box_X, box_Y);\n\n                setTimeout(function () {\n                    var gray_img = greyscale(tiny_img);\n\n                    var arr = create_array_28x28(gray_img);\n\n                    var payload = { \"values\": [arr] };\n\n                    populatePayloadDiv(payload);\n\n                    sendPayloadToDeployment(payload);\n\n                }, 1000);\n\n            }, 1000);\n        }\n\n    }, 1000);\n}\n\n\nfunction drawRedBox(x, y, width, height) {\n    var ctx = document.getElementById('drawing_box').getContext('2d');\n    ctx.strokeStyle = \"red\";\n    ctx.lineWidth = 2;\n    ctx.beginPath();\n    ctx.rect(x, y, width, height);\n    ctx.stroke();\n}\n\nfunction get_bounding_box() {\n    min_X = g_min_X - g_line_width / 2;\n    min_Y = g_min_Y - g_line_width / 2;\n    width = g_max_X - g_min_X + g_line_width;\n    height = g_max_Y - g_min_Y + g_line_width;\n\n    var ctx = document.getElementById('drawing_box').getContext('2d');\n    var digit_img = ctx.getImageData(min_X, min_Y, width, height);\n\n    // Use a red box to show what's going on\n    drawRedBox(min_X, min_Y, width, height);\n\n    return digit_img;\n}\n\n\nfunction center(digit_img) {\n    var canvas = document.getElementById('drawing_box');\n    var ctx = canvas.getContext('2d');\n\n    // Center the digit on the canvas\n    var digit_min_X = canvas.width / 2 - digit_img.width / 2;\n    var digit_min_Y = canvas.height / 2 - digit_img.height / 2;\n    clearCanvas();\n    ctx.beginPath();\n    ctx.putImageData(digit_img, digit_min_X, digit_min_Y);\n\n    // Get a square bounding box\n    var max_dimension = (digit_img.height > digit_img.width) ? digit_img.height : digit_img.width;\n    var square_box_min_X = canvas.width / 2 - max_dimension / 2;\n    var square_box_min_Y = canvas.height / 2 - max_dimension / 2;\n    centered_img = ctx.getImageData(square_box_min_X, square_box_min_Y, max_dimension, max_dimension);\n\n    // Use a red box to show what's going on\n    drawRedBox(square_box_min_X - 2, square_box_min_Y - 2, max_dimension + 4, max_dimension + 4);\n\n    return [centered_img, square_box_min_X, square_box_min_Y];\n}\n\n\nfunction resize_28x28(img, X, Y) {\n    var canvas = document.getElementById('drawing_box');\n    var ctx = canvas.getContext('2d');\n\n    // Save a copy of the original image in a temporary canvas\n    var tempCanvas1 = document.createElement(\"canvas\");\n    tempCanvas1.width = canvas.width;\n    tempCanvas1.height = canvas.height;\n    var tctx1 = tempCanvas1.getContext(\"2d\");\n    tctx1.putImageData(img, 0, 0);\n\n    // Use a second temporary canvas to scale the image way down to 28x28\n    var tempCanvas2 = document.createElement(\"canvas\");\n    tempCanvas2.width = canvas.width;\n    tempCanvas2.height = canvas.height;\n    var tctx2 = tempCanvas2.getContext(\"2d\");\n    scale = 28 / img.width;\n    tctx2.scale(scale, scale);\n    tctx2.drawImage(tempCanvas1, 0, 0);\n    tiny_img = tctx2.getImageData(0, 0, 28, 28);\n\n    // Show what's going on\n    clearCanvas();\n    ctx.beginPath();\n    ctx.drawImage(tempCanvas2, 6, 6);\n    drawRedBox(4, 4, 32, 32);\n\n    return tiny_img;\n}\n\n\nfunction greyscale(img) {\n    var canvas = document.getElementById('drawing_box');\n    var ctx = canvas.getContext('2d');\n    var grey_img = ctx.createImageData(img.width, img.height);\n\n    // Set Red, Green, and Blue values to 0, keep the Alpha value\n    for (var i = 0; i < img.data.length; i += 4) {\n        grey_img.data[i] = 0;\n        grey_img.data[i + 1] = 0;\n        grey_img.data[i + 2] = 0;\n        grey_img.data[i + 3] = img.data[i + 3];\n    }\n\n    // Show what's going on\n    clearCanvas();\n    ctx.beginPath();\n    ctx.putImageData(grey_img, 6, 6);\n    drawRedBox(4, 4, 32, 32);\n\n    return grey_img;\n}\n\n\nfunction create_array_28x28(img) {\n    var arr = [];\n    for (var i = 0; i < img.data.length; i += 4) {\n        arr.push(img.data[i + 3] / 255);\n    }\n\n    return arr;\n}\n\n\nfunction processresultHandler(result) {\n    var model_result = document.getElementById('response_code').innerHTML = JSON.stringify(result, null, 3);\n    populateResultsDiv(model_result);\n}\n",
+        "output": "str",
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "5e59667c.060bc8"
+            ]
+        ]
+    },
+    {
+        "id": "3b8700eb.47cff",
+        "type": "function",
+        "z": "380de17f.81714e",
+        "name": "text/css",
+        "func": "msg.headers = {\n    \"Content-Type\": \"text/css\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "5e59667c.060bc8"
+            ]
+        ]
+    },
+    {
+        "id": "2a9fe374.94a0ec",
+        "type": "http response",
+        "z": "de6bff09.2f4c2",
+        "name": "Send Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 660,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "3c79893c.db0236",
+        "type": "template",
+        "z": "de6bff09.2f4c2",
+        "name": "Prepare HTML Markup",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Visual Recognition</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://unpkg.com/carbon-components/css/carbon-components.min.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n\n    <style type=\"text/css\">\n    </style>\n  </head>\n  <body>\n    <div id='header'>\n        <h1>Visual Recognition</h1>\n        <h3>Instructions</h3>\n        <ol class=\"bx--list--unordered\">\n            <li class=\"bx--list__item\">Enable your camera</li>\n            <li class=\"bx--list__item\">Test Face or Object detection</li>\n        </ol>\n    </div>      \n    <br></br>\n    <button id=\"button-classify-objects\" class=\"bx--btn bx--btn--primary\" type=\"button\">\n        Classify Objects\n    </button>   \n    <button disabled id=\"button-detect-faces\" class=\"bx--btn bx--btn--secondary\" type=\"button\">\n     Detect Faces\n    </button>\n\n    <div class=\"main flex\">\n      <div id=\"video-container\" class=\"layout_3\">\n        <h3>Video</h3>\n        <video width=\"400\" id=\"video-element\" autoplay></video>\n      </div>\n      <div id=\"image-container\" class=\"layout_3\">\n        <h3>Snapshot</h3>\n        <img width=\"400\" id=\"image-element\" src=\"\" />\n      </div>      \n      <div id=\"result-container\" class=\"layout_3\">\n          <h3>Result</h3>\n          <pre id=\"result_pre\" class=\"code_snippet\"></pre>\n      </div>\n    </div>\n    \n    <canvas style=\"display:none;\"></canvas>\n\n    <script>\n      const img = document.querySelector(\"#image-element\");\n      const video = document.querySelector(\"#video-element\");\n      const canvas = document.createElement(\"canvas\");\n\n      function startVideo() {\n        navigator.mediaDevices\n          .getUserMedia({\n            video: true\n          })\n          .then(stream => {\n            console.log(\"Video started.\");\n            video.srcObject = stream;\n          })\n          .catch(err => {\n            console.log(\"Failed to start video.\");\n          });\n      }\n\n      function displayResult(data) {\n        document.getElementById(\"result_pre\").innerHTML = `${data}`;\n      }\n\n      function startAnalysis(mode) {\n        canvas.width = video.videoWidth;\n        canvas.height = video.videoHeight;\n        canvas.getContext(\"2d\").drawImage(video, 0, 0);\n        img.src = canvas.toDataURL(\"image/webp\");\n\n        const imageBlobPromise = new Promise((resolve, reject) => {\n          canvas.toBlob(blob => {\n            resolve(blob);\n          });\n        });\n\n        displayResult(\"Analyzing...\");\n\n        imageBlobPromise\n          .then(imageBlob => {\n            return fetch(`/api/visual-recognition?mode=${mode}`, {\n              method: \"POST\",\n              body: imageBlob\n            });\n          })\n          .then(response => response.json())\n          .then(responseJson => {\n            displayResult(`<pre>${JSON.stringify(responseJson, null, 4)}</pre>`);\n          })\n          .catch(error => {\n            displayResult(\"Failed to analyze\");\n            console.error(\"Error:\", error);\n          });\n      }\n\n      // register click handlers\n      document.getElementById(\"button-classify-objects\").onclick = function() {\n        startAnalysis(\"classify\");\n      };\n\n      document.getElementById(\"button-detect-faces\").onclick = function() {\n        startAnalysis(\"faces\");\n      };\n\n      // turn on camera\n      startVideo();\n    </script>\n  </body>\n</html>\n",
+        "output": "str",
+        "x": 413,
+        "y": 60,
+        "wires": [
+            [
+                "2a9fe374.94a0ec"
+            ]
+        ]
+    },
+    {
+        "id": "ab02817c.1ebe1",
+        "type": "http in",
+        "z": "de6bff09.2f4c2",
+        "name": "",
+        "url": "/ui/visual-recognition",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 146,
+        "y": 60,
+        "wires": [
+            [
+                "3c79893c.db0236"
+            ]
+        ]
+    },
+    {
+        "id": "a860ba7e.8f9298",
+        "type": "http in",
+        "z": "de6bff09.2f4c2",
+        "name": "",
+        "url": "/api/visual-recognition",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 156,
+        "y": 120,
+        "wires": [
+            [
+                "816c8199.3d075"
+            ]
+        ]
+    },
+    {
+        "id": "c7f51389.665d1",
+        "type": "http response",
+        "z": "de6bff09.2f4c2",
+        "name": "Send Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1110,
+        "y": 121,
+        "wires": []
+    },
+    {
+        "id": "88c06fcf.23231",
+        "type": "visual-recognition-v3",
+        "z": "de6bff09.2f4c2",
+        "name": "Visual Recognition",
+        "vr-service-endpoint": "https://gateway.watsonplatform.net/visual-recognition/api",
+        "image-feature": "detectFaces",
+        "lang": "en",
+        "x": 666,
+        "y": 120,
+        "wires": [
+            [
+                "c5f3f115.c761e"
+            ]
+        ]
+    },
+    {
+        "id": "c5f3f115.c761e",
+        "type": "function",
+        "z": "de6bff09.2f4c2",
+        "name": "Prepare Response",
+        "func": "msg.payload = msg.result;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 902,
+        "y": 120,
+        "wires": [
+            [
+                "c7f51389.665d1"
+            ]
+        ]
+    },
+    {
+        "id": "816c8199.3d075",
+        "type": "function",
+        "z": "de6bff09.2f4c2",
+        "name": "Prepare Request",
+        "func": "msg.params = {\n    \"detect_mode\": msg.req.query[\"mode\"]\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 400.5,
+        "y": 120,
+        "wires": [
+            [
+                "88c06fcf.23231"
+            ]
+        ]
+    },
+    {
+        "id": "f48c6960.31ea98",
+        "type": "http in",
+        "z": "1bad8c04.b1d4c4",
+        "name": "",
+        "url": "/api/tone-analyzer",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "77a49005.10dfd"
+            ]
+        ]
+    },
+    {
+        "id": "77a49005.10dfd",
+        "type": "function",
+        "z": "1bad8c04.b1d4c4",
+        "name": "Prepare Request",
+        "func": "msg.payload = msg.req.body.text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 404.5,
+        "y": 120,
+        "wires": [
+            [
+                "9402f1d8.2b892"
+            ]
+        ]
+    },
+    {
+        "id": "8f472819.4fdab8",
+        "type": "function",
+        "z": "1bad8c04.b1d4c4",
+        "name": "Prepare Response",
+        "func": "msg.payload = msg.response;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 120,
+        "wires": [
+            [
+                "f09a2011.032e9"
+            ]
+        ]
+    },
+    {
+        "id": "f09a2011.032e9",
+        "type": "http response",
+        "z": "1bad8c04.b1d4c4",
+        "name": "Send Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1080,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9402f1d8.2b892",
+        "type": "watson-tone-analyzer-v3",
+        "z": "1bad8c04.b1d4c4",
+        "name": "",
+        "tones": "all",
+        "sentences": "true",
+        "contentType": "false",
+        "tone-method": "generalTone",
+        "interface-version": "2017-09-21",
+        "inputlang": "en",
+        "default-endpoint": false,
+        "service-endpoint": "https://gateway-lon.watsonplatform.net/tone-analyzer/api",
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "8f472819.4fdab8"
+            ]
+        ]
+    },
+    {
+        "id": "4084b448.f82b0c",
+        "type": "http response",
+        "z": "1bad8c04.b1d4c4",
+        "name": "Send Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 660,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "15f59b83.d172f4",
+        "type": "template",
+        "z": "1bad8c04.b1d4c4",
+        "name": "Prepare HTML Markup",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Tone Analyzer</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://unpkg.com/carbon-components/css/carbon-components.min.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n\n    <style type=\"text/css\">\n    </style>\n  </head>\n  <body>\n    <div id='header'>\n        <h1>Tone Analyzer</h1>\n        <h3>Instructions</h3>\n        <ol class=\"bx--list--unordered\">\n            <li class=\"bx--list__item\">Copy or enter text to analyze</li>\n            <li class=\"bx--list__item\">Run analysis</li>\n        </ol>\n    </div>\n    <br></br>    \n    <button id=\"button\" class=\"bx--btn bx--btn--primary\" type=\"button\">\n        Analyze tone\n    </button>\n    <div class=\"main flex\">\n        <div class=\"layout_3\">\n          <h3>Sample Text</h3>\n          <div class=\"bx--form-item\">\n            <label for=\"text-area\" class=\"bx--label\">Input Text</label>\n            <div class=\"bx--form__helper-text\">\n              Add (English) to analyze tone for.\n            </div>\n             <div class=\"bx--text-area__wrapper\">\n              <textarea id=\"text-area\" class=\"bx--text-area bx--text-area--v2\" rows=\"4\" cols=\"50\"></textarea>\n            </div>\n          </div>\n        </div>\n        <div class=\"layout_3\">\n          <h3>Result</h3>\n          <pre id=\"result-container\" class=\"code_snippet\"></pre>\n        </div>\n\n    </div>\n\n    <script>\n      function displayResult(data) {\n        document.getElementById(\"result-container\").innerHTML = `${data}`;\n      }\n\n      function startAnalysis(data) {\n        return fetch(`/api/tone-analyzer`, {\n          method: \"POST\",\n          body: JSON.stringify({ text: data }),\n          headers: {\n            \"Content-Type\": \"application/json\"\n          }\n        })\n          .then(response => response.json())\n          .then(responseJson => {\n            displayResult(`<pre>${JSON.stringify(responseJson, null, 4)}</pre>`);\n          })\n          .catch(error => {\n            displayResult(\"Failed to analyze\");\n            console.error(\"Error:\", error);\n          });\n      }\n\n      // register click handlers\n      document.getElementById(\"button\").onclick = function() {\n        startAnalysis(document.getElementById(\"text-area\").value);\n      };\n    </script>\n  </body>\n</html>\n",
+        "output": "str",
+        "x": 413,
+        "y": 60,
+        "wires": [
+            [
+                "4084b448.f82b0c"
+            ]
+        ]
+    },
+    {
+        "id": "66e58867.c23498",
+        "type": "http in",
+        "z": "1bad8c04.b1d4c4",
+        "name": "",
+        "url": "/ui/tone-analyzer",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 136,
+        "y": 60,
+        "wires": [
+            [
+                "15f59b83.d172f4"
+            ]
+        ]
+    },
+    {
+        "id": "ec393f3e.65f15",
+        "type": "watson-translator",
+        "z": "88ed869a.ce4158",
+        "name": "",
+        "action": "translate",
+        "basemodel": "en-tr",
+        "domain": "general",
+        "srclang": "de",
+        "destlang": "en",
+        "password": "",
+        "apikey": "1LP1gHMbkiqreQyx-Zsgo1VZSuqR3VHTBsMXRNmAsHnY",
+        "custom": "",
+        "domainhidden": "general",
+        "srclanghidden": "de",
+        "destlanghidden": "en",
+        "basemodelhidden": "",
+        "customhidden": "",
+        "filetype": "forcedglossary",
+        "trainid": "",
+        "lgparams2": true,
+        "neural": false,
+        "default-endpoint": false,
+        "service-endpoint": "https://gateway-fra.watsonplatform.net/language-translator/api",
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "dd9acdd0.cfd6f"
+            ]
+        ]
+    },
+    {
+        "id": "d3ac4eb3.0dcd2",
+        "type": "http in",
+        "z": "88ed869a.ce4158",
+        "name": "",
+        "url": "/api/translator",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 118.5,
+        "y": 121,
+        "wires": [
+            [
+                "4a4d52ec.662bdc"
+            ]
+        ]
+    },
+    {
+        "id": "4a4d52ec.662bdc",
+        "type": "function",
+        "z": "88ed869a.ce4158",
+        "name": "Prepare Request",
+        "func": "msg.payload = msg.req.body.text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 393,
+        "y": 121,
+        "wires": [
+            [
+                "ec393f3e.65f15"
+            ]
+        ]
+    },
+    {
+        "id": "3fa383e1.68d48c",
+        "type": "http response",
+        "z": "88ed869a.ce4158",
+        "name": "Send Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1048.5,
+        "y": 121,
+        "wires": []
+    },
+    {
+        "id": "52547f80.e9bac",
+        "type": "http response",
+        "z": "88ed869a.ce4158",
+        "name": "Send Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 652.5,
+        "y": 55,
+        "wires": []
+    },
+    {
+        "id": "f8895d2b.04a5e",
+        "type": "template",
+        "z": "88ed869a.ce4158",
+        "name": "Prepare HTML Markup",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Translator</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://unpkg.com/carbon-components/css/carbon-components.min.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n\n    <style type=\"text/css\">\n    </style>\n  </head>\n  <body>\n    <div id='header'>\n        <h1>Translator</h1>\n        <h3>Instructions</h3>\n        <ol class=\"bx--list--unordered\">\n            <li class=\"bx--list__item\">Copy or enter text to translate</li>\n            <li class=\"bx--list__item\">Click \"Translate text\"</li>\n        </ol>\n    </div>\n    <br></br>        \n      <button id=\"button\" class=\"bx--btn bx--btn--primary\" type=\"button\">\n        Translate text\n      </button>\n    <div class=\"flex\">\n      <div class=\"layout_3\">\n         <h3>Sample Text</h3>\n\n          <div class=\"bx--form-item\">\n            <label for=\"text-area\" class=\"bx--label\">Input Text</label>\n            <div class=\"bx--form__helper-text\">\n              Add text (German) to translate into English.\n            </div>\n            <div class=\"bx--text-area__wrapper\">\n              <textarea id=\"text-area\" class=\"bx--text-area bx--text-area--v2\" rows=\"4\" cols=\"50\"></textarea>\n            </div>\n          </div>\n      </div>\n      <div class=\"layout_3\">\n         <h3>Result</h3>\n         <div>\n             <pre id=\"result-container\" class=\"code_snippet\"></pre>\n         </div>\n      </div>\n    </div>\n\n    <script>\n      function displayResult(data) {\n        document.getElementById(\"result-container\").innerHTML = `${data}`;\n      }\n\n      function startAnalysis(data) {\n        return fetch(`/api/translator`, {\n          method: \"POST\",\n          body: JSON.stringify({ text: data }),\n          headers: {\n            \"Content-Type\": \"application/json\"\n          }\n        })\n          .then(response => response.json())\n          .then(responseJson => {\n            displayResult(`<pre>${JSON.stringify(responseJson, null, 4)}</pre>`);\n          })\n          .catch(error => {\n            displayResult(\"Failed to analyze\");\n            console.error(\"Error:\", error);\n          });\n      }\n\n      // register click handlers\n      document.getElementById(\"button\").onclick = function() {\n        startAnalysis(document.getElementById(\"text-area\").value);\n      };\n    </script>\n  </body>\n</html>\n",
+        "output": "str",
+        "x": 405.5,
+        "y": 55,
+        "wires": [
+            [
+                "52547f80.e9bac"
+            ]
+        ]
+    },
+    {
+        "id": "cd4532cf.63453",
+        "type": "http in",
+        "z": "88ed869a.ce4158",
+        "name": "",
+        "url": "/ui/translator",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 108.5,
+        "y": 55,
+        "wires": [
+            [
+                "f8895d2b.04a5e"
+            ]
+        ]
+    },
+    {
+        "id": "dd9acdd0.cfd6f",
+        "type": "function",
+        "z": "88ed869a.ce4158",
+        "name": "Prepare Response",
+        "func": "msg.payload = msg.translation;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 842.5,
+        "y": 121,
+        "wires": [
+            [
+                "3fa383e1.68d48c"
+            ]
+        ]
+    },
+    {
+        "id": "cfe4ca1.a3b6238",
+        "type": "http in",
+        "z": "380de17f.81714e",
+        "name": "",
+        "url": "/api/digit-recognizer",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "8f0d8080.744a6"
+            ]
+        ]
+    },
+    {
+        "id": "8f0d8080.744a6",
+        "type": "function",
+        "z": "380de17f.81714e",
+        "name": "",
+        "func": "const apiKey = global.get(\"DIGIT_RECOGNIZER_CONFIG\").apiKey\nmsg.headers = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n}\nmsg.payload = \"apikey=\" + apiKey + \"&grant_type=urn:ibm:params:oauth:grant-type:apikey\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "68868b5e.d27314"
+            ]
+        ]
+    },
+    {
+        "id": "bad632c9.86d9c",
+        "type": "inject",
+        "z": "2215a883.0a9278",
+        "name": "Update Configuration",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 80,
+        "wires": [
+            [
+                "7a9b3c5d.8f8a34",
+                "38d6df88.8677c"
+            ]
+        ]
+    },
+    {
+        "id": "7a9b3c5d.8f8a34",
+        "type": "change",
+        "z": "2215a883.0a9278",
+        "name": "Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "DIGIT_RECOGNIZER_CONFIG",
+                "pt": "global",
+                "to": "{\"apiKey\":\"\",\"instanceId\":\"\",\"deploymentEndpointUrl\":\"\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38d6df88.8677c",
+        "type": "debug",
+        "z": "2215a883.0a9278",
+        "name": "Log",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Updated configuration\"",
+        "targetType": "jsonata",
+        "x": 390,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "68868b5e.d27314",
+        "type": "http request",
+        "z": "380de17f.81714e",
+        "name": "getAccessToken",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "https://iam.bluemix.net/oidc/token",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "basic",
+        "x": 520,
+        "y": 240,
+        "wires": [
+            [
+                "e9a48bf.a14ca78"
+            ]
+        ]
+    },
+    {
+        "id": "e9a48bf.a14ca78",
+        "type": "function",
+        "z": "380de17f.81714e",
+        "name": "",
+        "func": "const config = global.get(\"DIGIT_RECOGNIZER_CONFIG\");\nmsg.method = \"POST\",\nmsg.url = config.deploymentEndpointUrl;\nmsg.headers = {\n    \"Content-type\": \"application/json\",\n\t\"Authorization\": \"Bearer \" + msg.payload.access_token,\n\t\"ML-Instance-ID\": config.instanceId\n}\nmsg.payload = msg.req.body;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "4bc4632b.d8e98c"
+            ]
+        ]
+    },
+    {
+        "id": "4bc4632b.d8e98c",
+        "type": "http request",
+        "z": "380de17f.81714e",
+        "name": "runPrediction",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 840,
+        "y": 240,
+        "wires": [
+            [
+                "5e59667c.060bc8"
+            ]
+        ]
+    },
+    {
+        "id": "e57df21a.ef68e",
+        "type": "http in",
+        "z": "2215a883.0a9278",
+        "name": "",
+        "url": "/ui/styles.css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "9fab0fc8.24db5"
+            ]
+        ]
+    },
+    {
+        "id": "9fab0fc8.24db5",
+        "type": "template",
+        "z": "2215a883.0a9278",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "css",
+        "syntax": "mustache",
+        "template": "body {\n    margin: 2em;\n}\n\nh3 {\n    margin-top: 1em;\n}\n\n\n.flex {\n    display: flex;\n    flex-wrap: wrap;\n}\n\n.layout_3 {\n    width: 33%;\n}\n\n.code_snippet {\n    background-color: rgb(244, 244, 244);\n    width: 80%;\n    height: 300px;\n    overflow-y: scroll;\n    padding: 1em;\n    font-family: monospace;\n    font-size: 1.2em;\n}",
+        "output": "str",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "f5fcff9e.bfd82"
+            ]
+        ]
+    },
+    {
+        "id": "b58da0c.354f56",
+        "type": "http response",
+        "z": "2215a883.0a9278",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f5fcff9e.bfd82",
+        "type": "function",
+        "z": "2215a883.0a9278",
+        "name": "text/css",
+        "func": "msg.headers = {\n    \"Content-Type\": \"text/css\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "b58da0c.354f56"
+            ]
+        ]
+    }
+]
