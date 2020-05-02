@@ -14,8 +14,6 @@ These examples can be used as a basis for wiring together your own prototypes fo
 
 ### Instructions
 
-
-
 #### Step 1 - Import Flows
 - Access your Node-RED instance and log in
 - Install [Node-RED nodes for IBM Watson services](https://flows.nodered.org/node/node-red-node-watson)
@@ -97,4 +95,16 @@ This example makes use of the [Watson Language Translator](https://www.ibm.com/w
 Check the [API documentation](https://cloud.ibm.com/apidocs/language-translator) for details about the response format.
 
 ##### Step 3.4 - Digit Recognizer
-... TODO ...
+This example requires a deployed model for the MNIST data set. Make sure to work through the [TensorFlow model deployment](../tf-model-deployment) exercise first and note the endpoint URL of the model deployment.
+
+- Update the _Update_ node in the _Global_ tab
+![](./screenshots/20.png)
+- Fill in the apiKey and instanceId of your Machine Learning service instance and the deploymentEndpointUrl from the previous exercise
+![](./screenshots/21.png)
+- Click done and deploy
+- Try the demo, you should be able to recognize hand-written digits
+![](./screenshots/22.png)
+
+The configuration you updated in the _Global_ tab is read from two nodes in the _Digit Recognizer_ tab and used to communicate with the [Watson Machine Learning](https://watson-ml-api.mybluemix.net/#!/Deployments/listAllDeployments) API with REST requests.
+![](./screenshots/23.png)
+- If you allow unauthenticated access to your flow editor, be aware that everyone can review the API key configured in the _Update_ node.
