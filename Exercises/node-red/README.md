@@ -108,3 +108,6 @@ This example requires a deployed model for the MNIST data set. Make sure to work
 The configuration you updated in the _Global_ tab is read from two nodes in the _Digit Recognizer_ tab and used to communicate with the [Watson Machine Learning](https://watson-ml-api.mybluemix.net/#!/Deployments/listAllDeployments) API with REST requests.
 ![](./screenshots/23.png)
 - If you allow unauthenticated access to your flow editor, be aware that everyone can review the API key configured in the _Update_ node.
+
+### Next Steps
+Next, try to experiment on your own to prepare for working on your use-cases. If you need some inspiration, check out https://flows.nodered.org/ and review existing nodes (or flows) that make it easy to integrate various devices and APIs.
