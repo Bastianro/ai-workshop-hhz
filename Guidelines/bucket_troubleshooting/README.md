@@ -1,6 +1,6 @@
 ## How to solve the error "There are no files in this bucket" in the Neural Network Modeler tutorial? 
 
-_This question regards the optional exercise "Neural Network Modeler". _ 
+_This question regards the optional exercise "Neural Network Modeler"_. 
 
 We received an error "There are no files in this bucket", when following the tutorial at Step 2, 4. d - even though the files were in the bucket. (Side note: Neural Network Modeler is in beta mode) 
 
