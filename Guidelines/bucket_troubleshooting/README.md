@@ -18,10 +18,10 @@ In a separate window/tab in your browser, open your Cloud Object Storage (subseq
 - Here, you have information you need for the COS _Connection details_ in your Watson Studio project.
 Copy and paste these values (always without "") : 
 
-"apikey" --> _API Key_
-"access_key_id" --> _Access Key_ 
-"secret_access_key" --> _Secret Key_
-"resource_instance_id" --> _Resource Instance ID_
+ - "apikey" --> _API Key_ 
+ - "access_key_id" --> _Access Key_  
+ - "secret_access_key" --> _Secret Key_ 
+ - "resource_instance_id" --> _Resource Instance ID_ 
 
 Return to the COS window/tab in your browser, click on _Endpoints_ on the left side, _Select resiliency_: Regional and _Select location_: us-south, and copy the _Direct URL_.\
 ![](./screenshots/4.png)
