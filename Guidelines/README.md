@@ -18,4 +18,4 @@ This folder contains guidelines that walk you through common tasks needed to com
 - [How can I provision a free Node-RED instance on IBM Cloud?](./node-red-cloud)
 
 ## FAQs: Troubleshooting
-- [How to solve the error "There are no files in this bucket" in the Neural Network Modeler tutorial?] (./bucket_troubleshooting)
+- [How to solve the error "There are no files in this bucket" in the Neural Network Modeler tutorial](./bucket_troubleshooting)
