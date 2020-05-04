@@ -1,10 +1,10 @@
 ## Prototyping with Node-RED
 
 In this exercise you will learn how to build simple prototypes that integrate with different Watson APIs. A preview of what you are going to build is available at
+- https://node-red-demo.eu-de.cf.appdomain.cloud/ui/digit-recognizer
 - https://node-red-demo.eu-de.cf.appdomain.cloud/ui/visual-recognition
 - https://node-red-demo.eu-de.cf.appdomain.cloud/ui/tone-analyzer
 - https://node-red-demo.eu-de.cf.appdomain.cloud/ui/translator
-- https://node-red-demo.eu-de.cf.appdomain.cloud/ui/digit-recognizer
 
 These examples can be used as a basis for wiring together your own prototypes for other use-cases.
 
