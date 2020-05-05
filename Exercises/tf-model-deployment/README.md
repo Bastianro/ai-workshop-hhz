@@ -1,4 +1,4 @@
-## TensoFlow Model Deployment
+## TensorFlow Model Deployment
 
 In this exercise you will learn how to deploy a TensorFlow Model with the aid of the [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning) service on IBM cloud.  You will follow steps from a public sample notebook to deploy a prebuilt model for the [MNIST data set](https://en.wikipedia.org/wiki/MNIST_database).
 
