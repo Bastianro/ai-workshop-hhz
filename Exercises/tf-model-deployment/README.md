@@ -7,7 +7,7 @@ In this exercise you will learn how to deploy a TensorFlow Model with the aid of
 
 ### Instructions
 - Open the link to the sample notebook from the gallery at https://dataplatform.cloud.ibm.com/exchange/public/entry/view/0fc9ace31ddd8a70140584c0ef1ce320
-  - make sure to update the link depending on the region of your Watson Studio instance, e.g. use https://eu-de.dataplatform.cloud.ibm.com/exchange/public/entry/view/0fc9ace31ddd8a70140584c0ef1ce32 for Frankfurt.
+  - make sure to update the link depending on the region of your Watson Studio instance, e.g. use https://eu-de.dataplatform.cloud.ibm.com/exchange/public/entry/view/0fc9ace31ddd8a70140584c0ef1ce320 for Frankfurt.
   - if the link does not work: you find a copy of all required resources in the [data](./data) folder
 ![](./screenshots/1.png)
 - Click Add to project and select the project to add the notebook to
