@@ -8,7 +8,7 @@ _Watson Studio_ is hosted in four different regions
   - London: https://eu-gb.dataplatform.cloud.ibm.com/
   - Tokyo: https://jp-tok.dataplatform.cloud.ibm.com/
 
-Use the geographically closest region to work on your exercises.
+We recommend to use Dallas to work on your exercises because some beta features shown in the lecture may not yet be available in other regions.
 
 
 ## Login / Registration
