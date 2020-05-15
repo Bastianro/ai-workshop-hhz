@@ -45,7 +45,7 @@ In this exercise, we will create a _SPSS Modeler_ flow to analyze and prepare da
 - From the _Field Operations_ pane, add a _Filler_ node after the _Filter_ node. Double click on the node, add column _Embarked_ and replace null values with 'S', the most frequent value: \
 ![](./screenshots/18.png)
 - Finally, export the result to a new csv file. From the _Export_ pane, add a _Data Asset Export_ node after the _Filler_ node\
-![](./screenshots/19.png)
+![](./screenshots/19-2.png)
 - Your resulting data stream will look similar to this: \
 ![](./screenshots/20.png)
 - Right click on the _Data Asset Export_ node and select _Run_ to write the csv file to your project data assets. 
