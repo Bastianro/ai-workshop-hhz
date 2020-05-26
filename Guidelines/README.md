@@ -12,6 +12,7 @@ This folder contains guidelines that walk you through common tasks needed to com
 - [How can I review service credentials of a linked Watson Service?](./create-service-credentials)
 - [How can I download files from Github?](./download-files-github)
 - [How long can I use notebooks in Watson Studio for free?](./capacity-unit-hours)
+- [When I open a notebook an error is shown that indicates that Watson Studio no longer offers free environments. What should I do?](./change-environments) 
 
 ## FAQs: Node-RED
 - [How can I start Node-RED on my local workstation?](./node-red-workstation)
