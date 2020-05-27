@@ -12,7 +12,7 @@ In order to change the runtime, you need to follow the instructions from the off
 ![](./screenshots/2.png)
 ![](./screenshots/3.png)
 
-Afterwards you can continue to use the environment until your monthly limit of capacity unit hours is reached (see [free usage instructions](../capacity-unit-hours)) for more details)
+Afterwards you can continue to use the environment until your monthly limit of capacity unit hours is reached (see [free usage instructions](../capacity-unit-hours) for more details).
 
 ### Tip
 The smallest default python runtime (2 vCPU and 8 GB RAM) consumes 1 capacity unit per hour. You can create a custom environment definition with a smaller size that only consumes 0.5 capacity units per hour:
